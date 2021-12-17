@@ -1,7 +1,7 @@
 let Color = ./Color.dhall
 
-let Bar = 
-  { fuzzy : Bool
+let Node = 
+  { name : Text
   , color : Color
   }
-in Bar
+in Node

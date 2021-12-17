@@ -10,13 +10,13 @@ module Types where
 import Dhall.TH
 
 Dhall.TH.makeHaskellTypes
-    [ SingleConstructor "Foo" "Foo" "./dhall/Foo.dhall"
+    [ SingleConstructor "Zone" "Zone" "./dhall/Zone.dhall"
     , MultipleConstructors "Color" "./dhall/Color.dhall"
-    , SingleConstructor "Bar" "Bar" "./dhall/Bar.dhall"
-    , SingleConstructor "TeddyBear" "TeddyBear" "./dhall/TeddyBear.dhall"
+    , SingleConstructor "Node" "Node" "./dhall/Node.dhall"
+    , SingleConstructor "ZoneConfig" "ZoneConfig" "./dhall/ZoneConfig.dhall"
     ]
 
-deriving instance Show Foo
+deriving instance Show Zone
 deriving instance Show Color
-deriving instance Show Bar
-deriving instance Show TeddyBear
+deriving instance Show Node
+deriving instance Show ZoneConfig

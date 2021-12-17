@@ -1,28 +1,26 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE NamedFieldPuns #-}
 
 import Dhall
 import Types
 
-testFoo :: Foo 
-testFoo = 
-  Foo { name = "Martin"
-      , idNumber = 1
-      }
+mkNode name color = 
+  Node { name
+       , color
+       }
 
-testBar :: Bar
-testBar = 
-  Bar { fuzzy = False
-      , color = Blue
-      }
+[an1, an2, mn] = 
+  Prelude.map (uncurry mkNode) [("an1", Blue), ("an2", Blue), ("mn", Red)]
 
-testBear :: TeddyBear
-testBear = TeddyBear
-  { foo = testFoo
-  , bar = testBar
-  }
+testZone :: Zone
+testZone = 
+  Zone { zoneName = "test"
+       , anchorNodes = [an1, an2]
+       , mobileNode = mn
+       }
 
 main :: IO ()
 main = do
-  mkFuzzy :: TeddyBear -> TeddyBear <- detailed $ input (function inject auto) "./dhall/mkFuzzy.dhall"
-  print $ mkFuzzy testBear
+  mkZone :: Zone -> ZoneConfig <- inputFile (function inject auto) "./dhall/mkZone.dhall"
+  print $ mkZone testZone
